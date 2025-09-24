@@ -55,7 +55,7 @@ public class ShoppingCart {
             System.out.printf("%s - Cantidad: %d - Precio: $ %.2f ", product, carrito.get(product), tienda.get(product));
         }
 
-        System.out.printf("Total : %.2f\n", total);
+        System.out.printf("Total : %.2f\n", calcularTotal());
 
     }
 
@@ -67,7 +67,8 @@ public class ShoppingCart {
         if(total > 20.0){
             total = total * 0.90;
         }
-     return total;
+
+        return Math.round(total * 100.0) / 100.0;
     }
 
 
