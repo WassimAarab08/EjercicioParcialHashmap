@@ -7,22 +7,31 @@ public class ShoppingCart {
     public ShoppingCart() {
         this.carrito = new HashMap<>();
         this.tienda = new HashMap<>();
-        this.tienda.put(" manzana ", 0.50);
-        this.tienda.put(" platano ", 0.30);
-        this.tienda.put(" naranja ", 0.60);
-        this.tienda.put(" leche ", 2.50);
-        this.tienda.put(" pan", 1.50);
+        this.tienda.put("manzana", 0.50);
+        this.tienda.put("platano", 0.30);
+        this.tienda.put("naranja", 0.60);
+        this.tienda.put("leche", 2.50);
+        this.tienda.put("pan", 1.50);
     }
 
+    /**
+     * Metodo que agrega productos al carrito del cliente si esta disponible en la tienda complejidad Big 0(1)
+     * @param product
+     * @param cantida
+     */
     public void addProduct(String product, int cantida) {
         if (tienda.containsKey(product)) {
             carrito.put(product, cantida);
+            System.out.printf("Se ha agregado %d de %s al carrito\n", cantida, product);
         } else {
             System.out.print("El producto no existe\n");
         }
     }
 
-
+    /**
+     * Metodo que elimina un producto del carrito del cliente si comprobando si lo tiene en el carrito Big O(1)
+     * @param product
+     */
     public void eliminarProduct(String product) {
         if (carrito.containsKey(product)) {
             carrito.remove(product);
@@ -32,12 +41,12 @@ public class ShoppingCart {
         }
     }
 
+
     public void updateCantidad(String product, int cantidad) {
         if (carrito.containsKey(product)) {
             int cantidadActual = carrito.get(product);
             if (cantidad <= 0) {
-                carrito.remove(product);
-
+                eliminarProduct(product);
             } else {
                 carrito.put(product, cantidad);
                 System.out.printf("El producto %s se ha actulizado a %d\n", product, cantidad);
@@ -48,21 +57,21 @@ public class ShoppingCart {
     }
 
     public void mostrarCarrito(){
-        System.out.println("Contenido del carrito :");
-        System.out.println("----------------------------------");
+        System.out.println("\nContenido del carrito :");
+        System.out.println("==========================================");
 
         for (String product : carrito.keySet()) {
-            System.out.printf("%s - Cantidad: %d - Precio: $ %.2f ", product, carrito.get(product), tienda.get(product));
+            System.out.printf("%s - Cantidad: %d - Precio: $ %.2f\n", product, carrito.get(product), tienda.get(product)*carrito.get(product));
         }
-
-        System.out.printf("Total : %.2f\n", calcularTotal());
+        System.out.println("==========================================");
+        System.out.printf("Total : %.2f$\n", calcularTotal());
 
     }
 
     public double calcularTotal(){
         double total = 0.0;
         for (String product : carrito.keySet()) {
-            total = total + tienda.get(product);
+            total = total + tienda.get(product)*carrito.get(product);
         }
         if(total > 20.0){
             total = total * 0.90;
