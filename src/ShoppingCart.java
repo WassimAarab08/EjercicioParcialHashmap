@@ -41,7 +41,11 @@ public class ShoppingCart {
         }
     }
 
-
+    /**
+     * Metodo que actuliza la cantidad de un producto en el carrito o elimina en caso de ser 0 o menor Big O(1)
+     * @param product
+     * @param cantidad
+     */
     public void updateCantidad(String product, int cantidad) {
         if (carrito.containsKey(product)) {
             int cantidadActual = carrito.get(product);
@@ -56,6 +60,11 @@ public class ShoppingCart {
         }
     }
 
+
+    /**
+     * Metodo que recorre todo el carrito y imprime los productos agregados y el total de cada cada producto y el total general
+     * Big O(n)
+     */
     public void mostrarCarrito(){
         System.out.println("\nContenido del carrito :");
         System.out.println("==========================================");
@@ -68,6 +77,12 @@ public class ShoppingCart {
 
     }
 
+    /**
+     * Metodo que calcula el valor total del carrito multiplicado cantidad de producto por precio y sumándolo a una var
+     * Si el total supera los 20$ se aplica descuento de 10%
+     * Complejidad de Big O(n)
+     * @return
+     */
     public double calcularTotal(){
         double total = 0.0;
         for (String product : carrito.keySet()) {
